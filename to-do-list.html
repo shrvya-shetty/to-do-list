@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #93ebc6;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #app {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s;
+        }
+
+        li:hover {
+            background-color: #f5f5f5;
+        }
+
+        button.remove-btn {
+            background-color: #ff5555;
+        }
+
+        button.remove-btn:hover {
+            background-color: #dd4b4b;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Add a new task...">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+        <script>
+            function addTask() {
+                const taskInput = document.getElementById("taskInput");
+                const taskList = document.getElementById("taskList");
+
+                if (taskInput.value.trim() === "") {
+                    alert("Please enter a task!");
+                    return;
+                }
+
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    ${taskInput.value}
+                    <button class="remove-btn" onclick="removeTask(this)">Remove</button>
+                `;
+
+                taskList.appendChild(li);
+                taskInput.value = "";
+            }
+
+            function removeTask(button) {
+                const taskList = document.getElementById("taskList");
+                const li = button.parentNode;
+                taskList.removeChild(li);
+            }
+        </script>
+    </div>
+</body>
+</html>
